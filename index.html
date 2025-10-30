@@ -964,19 +964,94 @@
         </div>
     </div>
 
+    <!-- Report Issue Modal -->
+    <div id="reportModal" class="modal hidden">
+        <div class="modal-content" style="max-width: 500px;">
+            <button class="close-modal" onclick="closeReportModal()">&times;</button>
+          <div class="report-form-container" style="padding: 10px;">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h3 style="color: #667eea; margin-bottom: 10px;">🔧 Report an Issue</h3>
+                    <p style="color: #666; font-size: 14px;">Help us by reporting bugs or broken links<br>
+                    <span style="font-size: 12px; color: #888;">帮助我们改进网站，报告错误或失效链接</span></p>
+                </div>
+                
+                <form id="reportForm" class="report-form" action="https://formsubmit.co/canadaxfx1005@gmail.com" method="POST">
+                    <input type="text" name="_honey" style="display:none">
+                    <input type="hidden" name="_captcha" value="true">
+                    <input type="hidden" name="_next" value="https://canadaxfx.github.io/XZ-photo-gallery/report-success.html">
+                    <input type="hidden" name="_subject" value="XZ Gallery Issue Report">
+                    
+                    <div style="margin-bottom: 10px;">
+                        <label for="reportType" style="display: block; font-size: 13px; font-weight: 600; color: #444; margin-bottom: 5px;">Issue Type 问题类型</label>
+                        <select id="reportType" name="issue_type" required style="padding: 5px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; width: 100%;">
+                            <option value="">Select issue type...</option>
+                            <option value="broken-link">Broken Link 链接失效</option>
+                            <option value="missing-photo">Missing Photo 图片丢失</option>
+                            <option value="download-issue">Download Problem 下载问题</option>
+                            <option value="page-error">Page Error 页面错误</option>
+                            <option value="feature-request">Feature Request 功能建议</option>
+                            <option value="other">Other 其他</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <label for="reportPage" style="display: block; font-size: 13px; font-weight: 600; color: #444; margin-bottom: 5px;">Page/Section 页面/部分</label>
+                        <input type="text" id="reportPage" name="page_section" placeholder="e.g., 2024 photos, Game section, etc." required style="padding: 5px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; width: 100%;">
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <label for="reportDevice" style="display: block; font-size: 13px; font-weight: 600; color: #444; margin-bottom: 5px;">Device & Browser 设备和浏览器</label>
+                        <input type="text" id="reportDevice" name="device_browser" placeholder="e.g., iPhone Safari, Chrome Windows, etc." style="padding: 5px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; width: 100%;">
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <label for="reportDescription" style="display: block; font-size: 13px; font-weight: 600; color: #444; margin-bottom: 5px;">Description 详细描述</label>
+                        <textarea id="reportDescription" name="description" rows="4" placeholder="Please describe the issue in detail..." required style="padding: 5px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; width: 100%;"></textarea>
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <label for="reportEmail" style="display: block; font-size: 13px; font-weight: 600; color: #444; margin-bottom: 5px;">Your Email (Optional) 邮箱（可选）</label>
+                        <input type="email" id="reportEmail" name="user_email" placeholder="your@email.com (for follow-up)" style="padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; width: 100%;">
+                    </div>
+
+                    <div class="form-actions" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #eee;">
+                        <button type="button" class="nav-btn" style="background: #f8f8f8; color: #666; border: 1px solid #ddd;" onclick="closeReportModal()">Cancel 取消</button>
+                        <button type="submit" class="btn primary">Send Report 发送报告</button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
     <div id="back-to-top">
         <div class="arrow">▲</div>
         <div class="text">TOP<br>回顶部</div>
     </div>
-    
+
+
     <footer class="site-footer">
         <div class="footer-content">
-            <a class="footer-link" href="https://canadaxfx.github.io/XZworks/" target="_blank">Screen Arts of Xiao Zhan</a>
-            <a class="footer-link" href="https://www.youtube.com/@CanadaXFX" target="_blank">CanadaXFX on YouTube</a>
+            <div style="margin-bottom:10px;font-weight:700;">Explore more</div>
+            <a class="footer-link" href="https://canadaxfx.github.io/XZworks/" target="_blank" rel="noopener">Screen Arts of Xiao Zhan</a>
+            <a class="footer-link" href="https://www.youtube.com/@CanadaXFX" target="_blank" rel="noopener">CanadaXFX YouTube Channel</a>
         </div>
-        <div class="copyright-notice">© 2025 CanadaXFX. All rights reserved.</div>
 
-<a href="#" id="terms-toggle" class="footer-link">Terms of Use</a>
+        <div class="footer-content" style="margin-top: 20px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.2);">
+            <a class="footer-link" href="#" onclick="openReportModal(); return false;">
+                🔧 Report Broken Links or Bugs<br>
+                <small style="font-size:11px; opacity:0.8; font-weight:normal;">报告错误链接或功能问题</small>
+            </a>
+        </div>
+
+        <div class="copyright-notice">&copy; 2025 CanadaXFX. All rights reserved.</div>
+
+        <a href="#" id="terms-toggle" class="footer-link">Terms of Use</a>
+
         <div id="terms-content">
             <ul>
                 <li>All images and content related to Xiao Zhan belong to their respective copyright owners.</li>
@@ -1952,6 +2027,59 @@ function createSourcePaginationButtons(sourceName, currentPage, totalPages) {
             }
         }
 
+
+
+        /* ---------- Report Form Functions ---------- */
+        function openReportModal() {
+            document.getElementById('reportModal').classList.remove('hidden');
+            // Auto-detect user's device/browser info
+            const deviceInfo = `${navigator.platform} - ${navigator.userAgent.split(' ').slice(-2).join(' ')}`;
+            document.getElementById('reportDevice').value = deviceInfo;
+        }
+
+        function closeReportModal() {
+            document.getElementById('reportModal').classList.add('hidden');
+            document.getElementById('reportForm').reset();
+        }
+
+        // Rate limiting variables
+        let lastSubmissionTime = 0;
+        const SUBMISSION_COOLDOWN = 30000; // 30 seconds
+
+
+        /* ---------- Modal Event Listeners ---------- */
+        document.getElementById('photoModal').addEventListener('click', e => { 
+            if (e.target === e.currentTarget) closeModal(); 
+        });
+        document.getElementById('reportModal').addEventListener('click', e => { 
+            if (e.target === e.currentTarget) closeReportModal(); 
+        });
+        document.addEventListener('keydown', e => { 
+            if (e.key === 'Escape') {
+                closeModal(); 
+                closeReportModal();
+            }
+        });
+
+/* ---------- Form Rate Limiting ---------- */
+        document.getElementById('reportForm').addEventListener('submit', function(e) {
+            const now = Date.now();
+            if (now - lastSubmissionTime < SUBMISSION_COOLDOWN) {
+                e.preventDefault();
+                alert('Please wait 30 seconds between submissions. / 请等待30秒后再次提交。');
+                return false;
+            }
+            lastSubmissionTime = now;
+        });
+/* ---------- Form Submission Feedback ---------- */
+        document.getElementById('reportForm').addEventListener('submit', function() {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = '⏳ Sending... 发送中...';
+            submitBtn.disabled = true;
+            // Don't re-enable - let FormSubmit.co handle the redirect
+        });
+
+
 function setupFooterToggle() {
     const termsToggle = document.getElementById('terms-toggle');
     if (!termsToggle) return;
@@ -1973,13 +2101,6 @@ function setupFooterToggle() {
             btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         }
 
-        /* ---------- Modal Event Listeners ---------- */
-        document.getElementById('photoModal').addEventListener('click', e => { 
-            if (e.target === e.currentTarget) closeModal(); 
-        });
-        document.addEventListener('keydown', e => { 
-            if (e.key === 'Escape') closeModal();
-        });
     </script>
 </body>
 </html>
