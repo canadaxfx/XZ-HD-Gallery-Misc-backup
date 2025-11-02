@@ -1269,9 +1269,10 @@
                 filteredPhotos = photoData;
             } else {
                 // Check if the sourceType array *includes* the current filter
-                filteredPhotos = photoData.filter(p => 
-                    Array.isArray(p.sourceType) && p.sourceType.includes(currentFilter)
-                );
+filteredPhotos = photoData.filter(p => 
+    (p.sourceType === currentFilter) || 
+    (Array.isArray(p.sourceType) && p.sourceType.includes(currentFilter))
+);
             }
 
             // 2. Filter by search query (if one exists)
@@ -1438,7 +1439,7 @@ async function loadPhotoData() {
 
             const displayPhotos = currentFilter === 'all' ? 
                 photoData : 
-                photoData.filter(p => p.sourceType === currentFilter);
+                photoData.filter(p => (p.sourceType === currentFilter) || (Array.isArray(p.sourceType) && p.sourceType.includes(currentFilter)));
 
             const photosByYear = displayPhotos.reduce((acc, photo) => {
                 if (!acc[photo.year]) acc[photo.year] = [];
@@ -1555,9 +1556,10 @@ async function loadPhotoData() {
             
 // 2. Filter by source type
 if (currentFilter !== 'all') {
-    yearPhotos = yearPhotos.filter(p => 
-        Array.isArray(p.sourceType) && p.sourceType.includes(currentFilter)
-    );
+yearPhotos = yearPhotos.filter(p => 
+    (p.sourceType === currentFilter) || 
+    (Array.isArray(p.sourceType) && p.sourceType.includes(currentFilter))
+);
 }
 
             // 3. Filter by search query
@@ -1733,7 +1735,7 @@ function createPaginationButtons(year, currentPage, totalPages) {
             if (currentFilter === 'all') {
                 displayPhotos = photoData;
             } else {
-                displayPhotos = photoData.filter(p => p.sourceType === currentFilter);
+                displayPhotos = photoData.filter(p => (p.sourceType === currentFilter) || (Array.isArray(p.sourceType) && p.sourceType.includes(currentFilter)));
             }
 
             // 2. Filter by search query
