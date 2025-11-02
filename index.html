@@ -1136,13 +1136,13 @@
             document.getElementById('photoCounter').textContent = 
                 `${currentPhotoIndex + 1} of ${currentPhotoGroup.length}`;
             
-            const category = photo.sourceType ? 
-                photo.sourceType.charAt(0).toUpperCase() + photo.sourceType.slice(1) : 
-                '';
-            
+	    const mainSourceType = Array.isArray(photo.sourceType) ? photo.sourceType[0] : photo.sourceType;
+	    const category = mainSourceType ? 
+    	    	mainSourceType.charAt(0).toUpperCase() + mainSourceType.slice(1) : 
+    		'';            
             // Get group name, fall back to source name if no group
-            const groupName = photo.groupName || photo.source || 'Photo Collection';
-            
+	    const mainSource = Array.isArray(photo.source) ? photo.source[0] : photo.source;
+	    const groupName = photo.groupName || mainSource || 'Photo Collection';            
             // Combine them, checking if category exists
             document.getElementById('groupTitle').textContent = category ? 
                 `${category} - ${groupName}` : 
@@ -1265,10 +1265,13 @@
             let filteredPhotos = [];
 
             // 1. Filter by source type (drama, event, etc.)
-            if (currentFilter === 'all') {
+	   if (currentFilter === 'all') {
                 filteredPhotos = photoData;
             } else {
-                filteredPhotos = photoData.filter(p => p.sourceType === currentFilter);
+                // Check if the sourceType array *includes* the current filter
+                filteredPhotos = photoData.filter(p => 
+                    Array.isArray(p.sourceType) && p.sourceType.includes(currentFilter)
+                );
             }
 
             // 2. Filter by search query (if one exists)
@@ -1280,9 +1283,9 @@
                     return p.year.includes(query) || 
                            p.month.toLowerCase().includes(query) || 
                            p.date.includes(query) ||
-                           (p.source && p.source.toLowerCase().includes(query)) ||
-                           (p.note && p.note.toLowerCase().includes(query)) ||
-                           (p.sourceType && p.sourceType.toLowerCase().includes(query)) ||
+	    		   (Array.isArray(p.source) && p.source.some(s => s.toLowerCase().includes(query))) ||
+			   (p.note && p.note.toLowerCase().includes(query)) ||
+			   (Array.isArray(p.sourceType) && p.sourceType.some(t => t.toLowerCase().includes(query))) ||
                            (tagsString.includes(query));
                 });
             }
@@ -1509,7 +1512,7 @@ async function loadPhotoData() {
                     <img data-src="${generateImgurThumbnail(photo.url, 'm')}" alt="Photo ${photo.id}" class="lazy-image">
                     <div class="photo-overlay">
                         <span class="photo-date">${displayDate}</span>
-                        <span class="photo-source">${photo.source || photo.note || ''}</span>
+                        <span class="photo-source">${(Array.isArray(photo.source) ? photo.source.join(', ') : photo.source) || photo.note || ''}</span>
                     </div>
 		</div>
             `}).join('');
@@ -1564,9 +1567,9 @@ async function loadPhotoData() {
                     return p.year.includes(query) || 
                            p.month.toLowerCase().includes(query) || 
                            p.date.includes(query) ||
-                           (p.source && p.source.toLowerCase().includes(query)) ||
-                           (p.note && p.note.toLowerCase().includes(query)) ||
-                           (p.sourceType && p.sourceType.toLowerCase().includes(query)) ||
+			   (Array.isArray(p.source) && p.source.some(s => s.toLowerCase().includes(query))) ||
+			   (p.note && p.note.toLowerCase().includes(query)) ||
+			   (Array.isArray(p.sourceType) && p.sourceType.some(t => t.toLowerCase().includes(query))) ||
                            (tagsString.includes(query));
                 });
             } 
@@ -1740,9 +1743,9 @@ function createPaginationButtons(year, currentPage, totalPages) {
                     return p.year.includes(query) || 
                            p.month.toLowerCase().includes(query) || 
                            p.date.includes(query) ||
-                           (p.source && p.source.toLowerCase().includes(query)) ||
-                           (p.note && p.note.toLowerCase().includes(query)) ||
-                           (p.sourceType && p.sourceType.toLowerCase().includes(query)) ||
+			   (Array.isArray(p.source) && p.source.some(s => s.toLowerCase().includes(query))) ||
+			   (p.note && p.note.toLowerCase().includes(query)) ||
+			   (Array.isArray(p.sourceType) && p.sourceType.some(t => t.toLowerCase().includes(query))) ||
                            (tagsString.includes(query));
                 });
             }
@@ -1750,7 +1753,9 @@ function createPaginationButtons(year, currentPage, totalPages) {
             // 3. Now update the stats
             document.getElementById('totalPhotosDisplay').textContent = displayPhotos.length.toLocaleString();
             
-            const uniqueSources = new Set(displayPhotos.map(p => p.source));
+            const uniqueSources = new Set(displayPhotos.flatMap(p => 
+    Array.isArray(p.source) ? p.source : [p.source]
+));
             document.getElementById('totalSourcesDisplay').textContent = uniqueSources.size;
             
             document.getElementById('yearsSpanDisplay').textContent = new Set(displayPhotos.map(p => p.year)).size;
@@ -1776,14 +1781,26 @@ function createPaginationButtons(year, currentPage, totalPages) {
 
 function loadSourcesView() {
             const sourceGroups = photoData.reduce((acc, photo) => {
-                const source = photo.source || 'Unknown';
-                if (!acc[source]) acc[source] = { photos: [], name: source };
-                acc[source].photos.push(photo);
+                // Ensure photo.source is an array; handle old data that might still be a string
+                const sources = Array.isArray(photo.source) 
+                    ? photo.source 
+                    : [photo.source || 'Unknown'];
+
+                // Loop through *each* source in the photo's source array
+                sources.forEach(sourceName => {
+                    if (!sourceName) return; // Skip empty/null sources
+
+                    // Create the group if it doesn't exist
+                    if (!acc[sourceName]) {
+                        acc[sourceName] = { photos: [], name: sourceName };
+                    }
+                    // Add the photo to this group's list
+                    acc[sourceName].photos.push(photo);
+                });
                 return acc;
             }, {});
 
-            const container = document.getElementById('sourcesContainer');
-            
+            const container = document.getElementById('sourcesContainer');            
             // Sort sources by photo count (most first)
             const sortedSources = Object.values(sourceGroups)
                                         .sort((a, b) => b.photos.length - a.photos.length);
@@ -1875,8 +1892,9 @@ function loadSourcesView() {
             
             const { perPage, currentPage } = sourcePaginationSettings[sourceName];
             // Filter photos for this specific source
-            const sourcePhotos = photoData.filter(p => (p.source || 'Unknown') === sourceName);
-            
+            const sourcePhotos = photoData.filter(p => 
+    (Array.isArray(p.source) ? p.source.includes(sourceName) : p.source === sourceName)
+);            
             const totalPhotos = sourcePhotos.length;
             const safeId = getSourceSafeId(sourceName);
             const photosGrid = document.getElementById(`photos-source-${safeId}`);
