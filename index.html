@@ -1553,10 +1553,12 @@ async function loadPhotoData() {
 	   // 1. Filter by year
             let yearPhotos = photoData.filter(p => p.year === year);
             
-            // 2. Filter by source type
-            if (currentFilter !== 'all') {
-                yearPhotos = yearPhotos.filter(p => p.sourceType === currentFilter);
-            }
+// 2. Filter by source type
+if (currentFilter !== 'all') {
+    yearPhotos = yearPhotos.filter(p => 
+        Array.isArray(p.sourceType) && p.sourceType.includes(currentFilter)
+    );
+}
 
             // 3. Filter by search query
             if (currentSearchQuery) {
