@@ -303,15 +303,15 @@
             overflow: hidden;
         }
         
-        .modal-content { 
-            background: white; border-radius: 15px; 
-            max-width: 700px; max-height: 90vh;
-            width: 100%; 
-            position: relative; 
-            display: flex; flex-direction: column;
-            overflow-y: hidden;
-	    overflow-x: hidden;
-        }
+.modal-content { 
+    background: white; border-radius: 15px; 
+    max-width: 90vw; max-height: 90vh;  /* Changed from 700px to 90vw */
+    width: 100%; 
+    position: relative; 
+    display: flex; flex-direction: column;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
 
         /* Modal Header */
         .modal-header {
@@ -369,12 +369,14 @@
 	    min-height: 0;           
         }
 
-        .modal-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            transition: opacity 0.3s ease;
-        }
+.modal-photo {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
 
         /* Navigation Arrows */
         .nav-arrow {
@@ -575,6 +577,18 @@
             position: relative;
             z-index: 1;
         }
+
+/* Desktop photo modal fix */
+@media screen and (min-width: 768px) {
+    .modal-content {
+        max-width: min(90vw, 1200px); /* Allow up to 1200px on desktop */
+    }
+    
+    .modal-photo-container {
+        max-height: 70vh; /* Limit photo container height on desktop */
+    }
+}
+
 
 
         /* Mobile Responsiveness */
