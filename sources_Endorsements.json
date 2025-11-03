@@ -4553,8 +4553,12 @@
     "date": "2023-04-26",
     "month": "April",
     "year": "2023",
-    "sourceType": "event",
-    "source": "TODS",
+    "sourceType": [
+      "endorsement"
+    ],
+    "source": [
+      "TODS"
+    ],
     "note": null,
     "tags": [
       "TODS",
