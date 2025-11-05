@@ -891,9 +891,9 @@
             <div class="source-chip active" data-filter="all">All Sources 全部</div>
             <div class="source-chip" data-filter="drama">Dramas_Movies 影视</div>
             <div class="source-chip" data-filter="endorsement">Endorsements 代言</div>
-            <div class="source-chip" data-filter="event">Events 活动</div>
-            <div class="source-chip" data-filter="fansite">Fansites 粉丝站</div>
             <div class="source-chip" data-filter="magazine">Magazines 杂志</div>
+            <div class="source-chip" data-filter="event">Events 活动</div>
+            <div class="source-chip" data-filter="other">Others 其他非官方</div>
         </div>
 
             <div class="stats-grid">
@@ -1354,7 +1354,7 @@ async function loadPhotoData() {
                 // --- MODIFICATION 1 ---
                 // Add the suffixes of your custom files here.
                 // Note that "Endorsements" and "Dramas_Movies" are case-sensitive and must match your filenames.
-                const customFiles = ["Endorsements", "Dramas_Movies", "events", "fansites", "Magazines"];
+                const customFiles = ["Endorsements", "Dramas_Movies", "events", "Others", "Magazines"];
                 
                 let allPhotos = [];
                 
