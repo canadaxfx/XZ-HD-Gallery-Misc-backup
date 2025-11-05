@@ -22920,8 +22920,13 @@
     "date": "2019-07-25",
     "month": "July",
     "year": "2019",
-    "sourceType": "drama",
-    "source": "陈情令",
+    "sourceType": [
+      "drama"
+    ],
+    "source": [
+      "陈情令",
+      "时尚芭莎"
+    ],
     "note": null,
     "tags": [
       "陈情令",
@@ -22938,8 +22943,12 @@
     "date": "2019-07-25",
     "month": "July",
     "year": "2019",
-    "sourceType": "drama",
-    "source": "陈情令",
+    "sourceType": [
+      "drama"
+    ],
+    "source": [
+      "陈情令"
+    ],
     "note": null,
     "tags": [
       "陈情令",
@@ -23686,8 +23695,13 @@
     "date": "2019-06-25",
     "month": "June",
     "year": "2019",
-    "sourceType": "drama",
-    "source": "陈情令",
+    "sourceType": [
+      "drama"
+    ],
+    "source": [
+      "陈情令",
+      "时尚芭莎"
+    ],
     "note": null,
     "tags": [
       "陈情令",
@@ -23704,8 +23718,13 @@
     "date": "2019-06-25",
     "month": "June",
     "year": "2019",
-    "sourceType": "drama",
-    "source": "陈情令",
+    "sourceType": [
+      "drama"
+    ],
+    "source": [
+      "陈情令",
+      "时尚芭莎"
+    ],
     "note": null,
     "tags": [
       "陈情令",
