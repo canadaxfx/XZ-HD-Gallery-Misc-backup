@@ -242,10 +242,12 @@
     "month": "September",
     "year": "2025",
     "sourceType": [
-      "endorsement"
+      "endorsement",
+      "event"
     ],
     "source": [
-      "TODS"
+      "TODS",
+      "湾区升明月"
     ],
     "note": null,
     "tags": [
@@ -2352,8 +2354,14 @@
     "date": "2025-01-29",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "北京台春晚"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2370,8 +2378,14 @@
     "date": "2025-01-29",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "北京台春晚"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2388,8 +2402,14 @@
     "date": "2025-01-29",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "北京台春晚"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2644,8 +2664,14 @@
     "date": "2025-01-13",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "微博之夜"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2662,8 +2688,14 @@
     "date": "2025-01-13",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "微博之夜"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2680,8 +2712,14 @@
     "date": "2025-01-13",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "微博之夜"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2698,8 +2736,14 @@
     "date": "2025-01-13",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "微博之夜"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2716,8 +2760,14 @@
     "date": "2025-01-13",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "微博之夜"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2734,8 +2784,14 @@
     "date": "2025-01-13",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "微博之夜"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2752,8 +2808,14 @@
     "date": "2025-01-11",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "微博之夜"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2770,8 +2832,14 @@
     "date": "2025-01-11",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "微博之夜"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2788,8 +2856,14 @@
     "date": "2025-01-11",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "微博之夜"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2806,8 +2880,14 @@
     "date": "2025-01-11",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "微博之夜"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2825,8 +2905,14 @@
     "date": "2025-01-11",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "微博之夜"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
@@ -2844,8 +2930,14 @@
     "date": "2025-01-11",
     "month": "January",
     "year": "2025",
-    "sourceType": "endorsement",
-    "source": "GUCCI",
+    "sourceType": [
+      "endorsement",
+      "event"
+    ],
+    "source": [
+      "GUCCI",
+      "微博之夜"
+    ],
     "note": null,
     "tags": [
       "GUCCI",
