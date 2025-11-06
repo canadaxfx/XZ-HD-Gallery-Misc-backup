@@ -1,5 +1,26 @@
 [
   {
+    "id": 512,
+    "url": "https://i.imgur.com/Fzy9eh1.jpeg",
+    "date": "2025-11-04",
+    "month": "November",
+    "year": "2025",
+    "sourceType": [
+      "endorsement"
+    ],
+    "source": [
+      "RalphLauren拉夫劳伦香氛"
+    ],
+    "note": null,
+    "tags": [
+      "RalphLauren拉夫劳伦香氛"
+    ],
+    "weibo": "https://weibo.com/1840626523/QcjWcaM30",
+    "datePrecision": "day",
+    "groupName": "RalphLauren拉夫劳伦香氛_2025-11",
+    "quarkLink": "https://pan.quark.cn/s/111498660126"
+  },
+  {
     "id": 404,
     "url": "https://i.imgur.com/TDNXp98.jpeg",
     "date": "2025-11-01",
@@ -17,7 +38,7 @@
     ],
     "weibo": "https://weibo.com/7545734809/QbWMbewwl",
     "datePrecision": "day",
-    "groupName": "RalphLauren拉夫劳伦香氛_2025-11-01",
+    "groupName": "RalphLauren拉夫劳伦香氛_2025-11",
     "quarkLink": "https://pan.quark.cn/s/111498660126"
   },
   {
