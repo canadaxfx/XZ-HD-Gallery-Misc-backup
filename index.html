@@ -76,7 +76,28 @@
             color: white;
             border-color: #ee5a24;
         }
-        
+
+
+.modal-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 15px; 
+    padding: 0 5px;
+}
+
+.modal-tag-pill {
+    font-size: 11px;
+    padding: 4px 12px;
+    background-color: #f0f2f5;
+    color: #555;
+    border-radius: 15px;
+    border: 1px solid #e4e6eb;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
         /* Search and Filter Styles */
         .search-bar {
             width: 100%; max-width: 500px; padding: 15px; border: 2px solid #e0e0e0;
@@ -960,7 +981,7 @@
             </div>
 
             <div class="photo-info-panel">
-                
+                <div id="modalTags" class="modal-tags-container"></div>
                 <div class="download-section">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <h4 style="margin: 0; flex-grow: 1; text-align: center;">🔥Download Options & Links</h4>
@@ -1182,18 +1203,44 @@
             } else {
                 weiboBtn.style.display = 'none';
             }
-        }
 
-        function generateThumbnails() {
-            const container = document.getElementById('thumbnailContainer');
-            container.innerHTML = currentPhotoGroup.map((photo, index) => `
-                <img src="${generateImgurThumbnail(photo.url, 's')}" 
-                     class="thumbnail ${index === currentPhotoIndex ? 'active' : ''}" 
-                     onclick="goToPhoto(${index})" 
-                     alt="Thumbnail ${index + 1}"
-                     loading="lazy">
-            `).join('');
+const tagsContainer = document.getElementById('modalTags');
+    if (tagsContainer) {
+        if (photo.tags && Array.isArray(photo.tags) && photo.tags.length > 0) {
+            tagsContainer.innerHTML = photo.tags.map(tag => 
+                `<span class="modal-tag-pill">#${tag}</span>`
+            ).join('');
+            tagsContainer.style.display = 'flex';
+        } else {
+            tagsContainer.style.display = 'none';
         }
+    }
+}
+
+
+
+function generateThumbnails() {
+    const container = document.getElementById('thumbnailContainer');
+    // Safety check: if container is missing, stop to prevent errors
+    if (!container) return; 
+
+    container.innerHTML = currentPhotoGroup.map((photo, index) => `
+        <img src="${generateImgurThumbnail(photo.url, 's')}" 
+             class="thumbnail ${index === currentPhotoIndex ? 'active' : ''}" 
+             onclick="goToPhoto(${index})" 
+             alt="Thumbnail ${index + 1}"
+             loading="lazy">
+    `).join('');
+    
+    // Auto-scroll the strip to keep the active photo centered
+    setTimeout(() => {
+        const activeThumb = container.querySelector('.thumbnail.active');
+        if (activeThumb) {
+            activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    }, 100);
+}
+
 
         function goToPhoto(index) {
             if (index >= 0 && index < currentPhotoGroup.length) {
