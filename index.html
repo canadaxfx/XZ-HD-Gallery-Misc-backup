@@ -2081,11 +2081,12 @@ function createSourcePaginationButtons(sourceName, currentPage, totalPages) {
         }
 
         /* ---------- Download Function ---------- */
-        async function downloadPhoto() {
+async function downloadPhoto() {
             if (!window.currentPhotoForDownload) return;
             const photo = window.currentPhotoForDownload;
             const btn = document.getElementById('downloadBtn');
             
+            // Clean URL and create filename
             const urlParts = photo.url.split('?')[0];
             const ext = urlParts.split('.').pop().toLowerCase();
             const name = `XZ_${photo.source ? photo.source.replace(/\s+/g, '_') : 'Photo'}_${photo.date}.${ext}`;
@@ -2095,7 +2096,16 @@ function createSourcePaginationButtons(sourceName, currentPage, totalPages) {
                 btn.disabled = true;
 
                 if (window.showSaveFilePicker) {
-                    const res = await fetch(photo.url);
+                    // UPDATED FETCH: Added cache and referrerPolicy settings
+                    const res = await fetch(photo.url, {
+                        method: 'GET',
+                        mode: 'cors',
+                        cache: 'no-cache',             // Force fresh request
+                        referrerPolicy: 'no-referrer'  // Hide that request is from your site to avoid hotlink blocks
+                    });
+
+                    if (!res.ok) throw new Error('Network response was not ok');
+
                     const blob = await res.blob();
                     const handle = await window.showSaveFilePicker({ suggestedName: name });
                     const writable = await handle.createWritable();
@@ -2103,28 +2113,43 @@ function createSourcePaginationButtons(sourceName, currentPage, totalPages) {
                     await writable.close();
                     btn.innerHTML = 'Downloaded! ✓';
                 } else {
+                    // Mobile/Fallback method
+                    const res = await fetch(photo.url, {
+                        method: 'GET',
+                        mode: 'cors',
+                        cache: 'no-cache',
+                        referrerPolicy: 'no-referrer'
+                    });
+                    
+                    if (!res.ok) throw new Error('Network response was not ok');
+                    
+                    const blob = await res.blob();
+                    const blobUrl = URL.createObjectURL(blob);
+                    
                     const tempA = document.createElement('a');
-                    tempA.href = photo.url;
-                    tempA.target = '_blank';
+                    tempA.href = blobUrl;
                     tempA.download = name;
                     document.body.appendChild(tempA);
                     tempA.click();
                     document.body.removeChild(tempA);
-                    btn.innerHTML = 'Opening...';
+                    URL.revokeObjectURL(blobUrl); // Clean up
+                    
+                    btn.innerHTML = 'Downloaded! ✓';
                 }
             } catch (error) {
+                console.error("Download failed, opening fallback:", error);
+                // Fallback: Just open the image in a new tab if download fails
                 window.open(photo.url, '_blank');
                 btn.innerHTML = 'Opened in new tab';
             } finally {
                 setTimeout(() => {
-            btn.innerHTML = `🔥 Download Single Image<br>
-                <small style="opacity: 1;">Slightly Compressed</small><br>
-                <small style="opacity: 1;">下载单图 (轻压缩)</small>`;
-            btn.disabled = false;
+                    btn.innerHTML = `🔥 Download Single Image<br>
+                        <small style="opacity: 1;">Slightly Compressed</small><br>
+                        <small style="opacity: 1;">下载单图 (轻压缩)</small>`;
+                    btn.disabled = false;
                 }, 2000);
             }
         }
-
 
 
         /* ---------- Report Form Functions ---------- */
