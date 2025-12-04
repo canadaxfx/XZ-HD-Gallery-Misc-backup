@@ -2086,22 +2086,34 @@ async function downloadPhoto() {
             const photo = window.currentPhotoForDownload;
             const btn = document.getElementById('downloadBtn');
             
-            // Clean URL and create filename
+            // 1. Prepare Filename (Fixing the Array vs String bug)
             const urlParts = photo.url.split('?')[0];
             const ext = urlParts.split('.').pop().toLowerCase();
-            const name = `XZ_${photo.source ? photo.source.replace(/\s+/g, '_') : 'Photo'}_${photo.date}.${ext}`;
             
+            let sourceName = 'Photo';
+            if (photo.source) {
+                // Check if source is an Array (new data) or String (old data)
+                const rawSource = Array.isArray(photo.source) ? photo.source[0] : photo.source;
+                // Safely replace spaces with underscores
+                if (rawSource) {
+                    sourceName = rawSource.replace(/\s+/g, '_');
+                }
+            }
+            
+            const name = `XZ_${sourceName}_${photo.date}.${ext}`;
+            
+            // 2. Perform Download
             try {
                 btn.textContent = 'Preparing...';
                 btn.disabled = true;
 
                 if (window.showSaveFilePicker) {
-                    // UPDATED FETCH: Added cache and referrerPolicy settings
+                    // Desktop Method
                     const res = await fetch(photo.url, {
                         method: 'GET',
                         mode: 'cors',
-                        cache: 'no-cache',             // Force fresh request
-                        referrerPolicy: 'no-referrer'  // Hide that request is from your site to avoid hotlink blocks
+                        cache: 'no-cache',             
+                        referrerPolicy: 'no-referrer' 
                     });
 
                     if (!res.ok) throw new Error('Network response was not ok');
@@ -2113,7 +2125,7 @@ async function downloadPhoto() {
                     await writable.close();
                     btn.innerHTML = 'Downloaded! ✓';
                 } else {
-                    // Mobile/Fallback method
+                    // Mobile/Fallback Method
                     const res = await fetch(photo.url, {
                         method: 'GET',
                         mode: 'cors',
@@ -2132,13 +2144,13 @@ async function downloadPhoto() {
                     document.body.appendChild(tempA);
                     tempA.click();
                     document.body.removeChild(tempA);
-                    URL.revokeObjectURL(blobUrl); // Clean up
+                    URL.revokeObjectURL(blobUrl); 
                     
                     btn.innerHTML = 'Downloaded! ✓';
                 }
             } catch (error) {
                 console.error("Download failed, opening fallback:", error);
-                // Fallback: Just open the image in a new tab if download fails
+                // Fallback: Open in new tab
                 window.open(photo.url, '_blank');
                 btn.innerHTML = 'Opened in new tab';
             } finally {
@@ -2150,7 +2162,6 @@ async function downloadPhoto() {
                 }, 2000);
             }
         }
-
 
         /* ---------- Report Form Functions ---------- */
         function openReportModal() {
