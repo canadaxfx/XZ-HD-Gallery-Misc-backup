@@ -2117,8 +2117,10 @@ function createSourcePaginationButtons(sourceName, currentPage, totalPages) {
                 btn.innerHTML = 'Opened in new tab';
             } finally {
                 setTimeout(() => {
-                    btn.innerHTML = '🔥Download HD Image<br><small style="opacity: 1;">下载高清图</small>';
-                    btn.disabled = false;
+            btn.innerHTML = `🔥 Download Single Image<br>
+                <small style="opacity: 1;">Slightly Compressed</small><br>
+                <small style="opacity: 1;">下载单图 (轻压缩)</small>`;
+            btn.disabled = false;
                 }, 2000);
             }
         }
